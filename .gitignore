@@ -1,0 +1,24 @@
+.env
+/.idea
+
+###> symfony/framework-bundle ###
+/blog/.env.local
+/blog/.env.local.php
+/blog/.env.*.local
+/blog/config/secrets/prod/prod.decrypt.private.php
+/blog/public/bundles/
+/blog/var/
+/blog/vendor/
+###< symfony/framework-bundle ###
+
+/blog/.env
+/blog/.env.test
+/blog/.ready
+###> phpunit/phpunit ###
+/blog/phpunit.xml
+/blog/.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> lexik/jwt-authentication-bundle ###
+/blog/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

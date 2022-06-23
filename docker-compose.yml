@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  blog-nginx:
+    build:
+      context: ./blog/docker/development
+      dockerfile: nginx.docker
+    volumes:
+      - ./blog:/app
+    depends_on:
+      - blog-php-fpm
+    ports:
+      - "8080:80"
+  blog-php-fpm:
+    build:
+      context: ./blog/docker/development
+      dockerfile: php-fpm.docker
+    volumes:
+      - ./blog:/app
+    depends_on:
+      - blog-mysql
+  blog-mysql:
+    image: mysql:8
+    volumes:
+      - blog-mysql:/var/lib/mysql:rw
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: blog
+    ports:
+      - "33067:3306"
+  blog-php-cli:
+    build:
+      context: ./blog/docker/development
+      dockerfile: php-cli.docker
+    volumes:
+      - ./blog:/app
+      - /app/docker
+      - composer:/root/.composer/cache
+    depends_on:
+      - blog-mysql
+
+volumes:
+  blog-mysql:
+  composer:
